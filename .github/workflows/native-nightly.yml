@@ -1,0 +1,29 @@
+# Registration copy of .github/workflows/native-nightly.yml, for a manual run on this fork.
+#
+# GitHub lists a workflow, and accepts a manual run of it, only when this file is on the default branch. A run uses
+# the copy of the file on the branch that it runs on, so run this workflow with --ref set to the branch that has the
+# real file. A run on this branch builds nothing.
+name: Nightly native image
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the images that pass the smoke test
+        type: boolean
+        default: false
+      nacos_ref:
+        description: Branch, tag or commit of alibaba/nacos to build; empty for its default branch
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  registration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Explain
+        run: echo "Run this workflow with --ref set to the branch that holds the real workflow file."
